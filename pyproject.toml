@@ -1,0 +1,30 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "wakanda-whisper"
+version = "0.1.0"
+description = "A framework for automatic speech recognition (ASR) for african languages using OpenAI Whisper"
+readme = "README.md"
+requires-python = ">=3.9"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+authors = [
+    { name = "Lawrence Francis", email = "lawrencedikeu@gmail.com" }
+]
+maintainers = [
+    { name = "Lawrence Francis", email = "lawrencedikeu@gmail.com" }
+]
+dependencies = [
+    "openai-whisper",
+    "huggingface_hub"
+]
+
+[project.urls]
+Homepage = "https://github.com/wakandaai/wakanda-whisper"
+Issues = "https://github.com/wakandaai/wakanda-whisper/issues"
