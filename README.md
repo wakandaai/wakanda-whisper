@@ -1,6 +1,6 @@
-# Wakanda Whisper
+# wakanda-whisper
 
-Wakanda Whisper is a framework for automatic speech recognition (ASR) for African languages using OpenAI Whisper.
+wakanda-whisper is a framework for automatic speech recognition (ASR) for African languages using OpenAI Whisper.
 
 ## Installation
 
