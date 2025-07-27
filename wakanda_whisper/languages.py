@@ -1,7 +1,7 @@
 from whisper.tokenizer import LANGUAGES
 
 
-WAKANDA_LANGUAGES = {
+_LANGUAGES = {
     "en": "english",
     "zh": "chinese",
     "de": "german",
@@ -107,4 +107,4 @@ WAKANDA_LANGUAGES = {
 SUPPORTED_LANGUAGES = [("en", "english"), ("rw", "kinyarwanda")]
 
 LANGUAGES.clear()
-LANGUAGES.update(WAKANDA_LANGUAGES)
+LANGUAGES.update(_LANGUAGES)
