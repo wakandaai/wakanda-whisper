@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "wakanda-whisper"
-version = "0.1.0"
+version = "0.1.1"
 description = "A framework for automatic speech recognition (ASR) for african languages using OpenAI Whisper"
 readme = "README.md"
 requires-python = ">=3.9"
@@ -22,7 +22,8 @@ maintainers = [
 ]
 dependencies = [
     "openai-whisper",
-    "huggingface_hub"
+    "huggingface_hub",
+    "pyyaml",
 ]
 
 [project.urls]

@@ -4,7 +4,7 @@ from whisper import _ALIGNMENT_HEADS
 from whisper.model import Whisper, ModelDimensions
 from whisper.transcribe import transcribe as transcribe_function
 import torch
-import json
+import yaml
 import functools
 
 
@@ -14,11 +14,12 @@ def from_pretrained(model_name: str, device: str = None):
     Example: "WakandaAI/wakanda-whisper-small-rw-v1"
     """
     # download the config and checkpoint from huggingface
-    config = hf_hub_download(repo_id=model_name, filename="config.json", force_download=True)
+    config = hf_hub_download(repo_id=model_name, filename="config.yaml")
     model_path = hf_hub_download(repo_id=model_name, filename="model.pt")
     
     if config:
-        config = json.load(open(config, 'r'))
+        with open(config, "r") as f:
+                config = yaml.safe_load(f)
     else:
         raise ValueError(f"Model '{model_name}' does not have a valid config.json file.")
     
