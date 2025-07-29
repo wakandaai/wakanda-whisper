@@ -165,7 +165,7 @@ def create_interface():
     
     with gr.Blocks(title="Wakanda Whisper - Kinyarwanda ASR") as interface:
         
-        gr.Markdown("# Wakanda Whisper")
+        gr.Markdown("# Wakanda ASR")
         gr.Markdown("### Kinyarwanda Automatic Speech Recognition")
         gr.Markdown("Upload an audio file or record your voice to get Kinyarwanda transcription")
         
