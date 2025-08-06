@@ -1,3 +1,4 @@
+import whisper
 from whisper.tokenizer import LANGUAGES
 
 
@@ -108,3 +109,8 @@ SUPPORTED_LANGUAGES = [("en", "english"), ("rw", "kinyarwanda")]
 
 LANGUAGES.clear()
 LANGUAGES.update(_LANGUAGES)
+
+def get_whisper_tokenizer(language_code: str) -> whisper.tokenizer.Tokenizer:
+    num_languages = len(whisper.tokenizer.LANGUAGES)
+    tokenizer = whisper.tokenizer.get_tokenizer(True, num_languages=num_languages, language=language_code)
+    return tokenizer

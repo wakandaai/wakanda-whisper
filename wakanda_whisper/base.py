@@ -2,7 +2,8 @@ from huggingface_hub import hf_hub_download
 import whisper
 from whisper import _ALIGNMENT_HEADS
 from whisper.model import Whisper, ModelDimensions
-from whisper.transcribe import transcribe as transcribe_function
+from .decode import transcribe as transcribe_function
+from .languages import get_whisper_tokenizer
 import torch
 import yaml
 import functools
@@ -35,12 +36,11 @@ def from_pretrained(model_name: str, device: str = None):
         raise ValueError(f"Model '{model_name}' does not have a valid 'dims' in its config.")
     
     device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+    tokenizer = get_whisper_tokenizer(language)
     try:
-        def transcribe(model, audio, **kwargs):
-            if language != "multilingual":
-                kwargs['language'] = language
-            return transcribe_function(model, audio, without_timestamps=True, **kwargs)
-            
+        def transcribe(model, audio):
+            return transcribe_function(model, tokenizer, audio)
+
         Whisper.transcribe = transcribe
 
         dims  = ModelDimensions(**dims)
