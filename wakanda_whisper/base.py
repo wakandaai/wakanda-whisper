@@ -48,6 +48,12 @@ def from_pretrained(model_name: str, device: str = None):
         model.load_state_dict(torch.load(model_path, map_location=device))
         model.set_alignment_heads(_ALIGNMENT_HEADS[whisper_size])
 
-        return model
+        for module in model.modules():
+            if isinstance(module, whisper.model.LayerNorm):
+                module.float()
+            else:
+                module.half()
+        
+        return model.to(device)
     except Exception as e:
         raise RuntimeError(f"Failed to load model '{model_name}': {str(e)}")

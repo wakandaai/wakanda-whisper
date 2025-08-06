@@ -4,8 +4,7 @@ import torch
 
 @torch.no_grad()
 def batch_greedy_transcribe(model, mel, tokenizer):
-    mel = mel.to(model.device)
-
+    mel = mel.half().to(model.device)
     audio_features = model.encoder(mel)
     sot_tokens = tokenizer.sot_sequence_including_notimestamps
     prev_tokens = torch.tensor(sot_tokens).long().unsqueeze(0).repeat(mel.size(0),1)
@@ -37,12 +36,12 @@ def transcribe(model, tokenizer, audio):
     Transcribe audio using the model and tokenizer.
     """
     if isinstance(audio, list):
-        raise ValueError("Only a single audio is accepted")
-        # temp = []
-        # for s in audio:
-        #     a = whisper.load_audio(s)
-        #     a = whisper.pad_or_trim(a)
-        #     temp.append(a)
+        temp = []
+        for a in audio:
+            a = whisper.load_audio(a)
+            a = whisper.pad_or_trim(a)
+            temp.append(whisper.log_mel_spectrogram(a, n_mels=model.dims.n_mels, device=model.device))
+        mel = torch.stack(temp, dim=0)
     else:
         audio = whisper.load_audio(audio)
         audio = whisper.pad_or_trim(audio)
